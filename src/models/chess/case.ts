@@ -6,6 +6,7 @@ export class Case {
   private _y: number = 0;
   private _color: string = '';
   private _piece: Piece|undefined;
+  private _isSelected: boolean = false;
 
   constructor(x: number, y: number, color: string, piece: Piece | undefined) {
     this._x = x;
@@ -44,5 +45,13 @@ export class Case {
 
   set piece(value: Piece | undefined) {
     this._piece = value;
+  }
+
+  get isSelected(): boolean {
+    return this._isSelected;
+  }
+
+  set isSelected(value: boolean) {
+    this._isSelected = value;
   }
 }

@@ -56,4 +56,8 @@ export class ChessBoard {
   get board(): Case[] {
     return this._board;
   }
+
+  move(caseChess: Case): void {
+    caseChess.isSelected = !caseChess.isSelected;
+  }
 }
