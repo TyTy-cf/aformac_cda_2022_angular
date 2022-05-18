@@ -1,5 +1,6 @@
 
 import {Piece} from "./piece";
+import {Case} from "./case";
 
 export class King extends Piece {
 
@@ -7,8 +8,8 @@ export class King extends Piece {
     super(color, '/assets/images/chess/king-' + color + '.png');
   }
 
-  move(): void {
-    console.log('Move du roi !');
+  move(initialCase: Case, board: Case[]): Case[] {
+    return [];
   }
 
 }

@@ -7,6 +7,7 @@ export class Case {
   private _color: string = '';
   private _piece: Piece|undefined;
   private _isSelected: boolean = false;
+  private _availableMove: boolean = false;
 
   constructor(x: number, y: number, color: string, piece: Piece | undefined) {
     this._x = x;
@@ -53,5 +54,13 @@ export class Case {
 
   set isSelected(value: boolean) {
     this._isSelected = value;
+  }
+
+  get availableMove(): boolean {
+    return this._availableMove;
+  }
+
+  set availableMove(value: boolean) {
+    this._availableMove = value;
   }
 }

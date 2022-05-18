@@ -1,3 +1,4 @@
+import {Case} from "./case";
 
 export abstract class Piece {
 
@@ -25,6 +26,6 @@ export abstract class Piece {
     this._color = value;
   }
 
-  abstract move(): void;
+  abstract move(initialCase: Case, board: Case[]): Case[];
 
 }

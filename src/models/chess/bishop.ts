@@ -1,5 +1,6 @@
 
 import {Piece} from "./piece";
+import {Case} from "./case";
 
 export class Bishop extends Piece {
 
@@ -7,8 +8,7 @@ export class Bishop extends Piece {
     super(color, '/assets/images/chess/bishop-' + color + '.png');
   }
 
-  move(): void {
-    console.log('Move du fou !');
+  move(initialCase: Case, board: Case[]): Case[] {
+    return [];
   }
-
 }

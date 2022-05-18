@@ -7,6 +7,7 @@
            *ngFor="let caseChess of chessBoard.board"
            (click)="chessBoard.move(caseChess)"
            [class.selected]="caseChess.isSelected"
+           [class.available]="caseChess.availableMove"
       >
         <!-- ngIf ici va effectuer un truthy sur l'objet caseChess.piece -->
         <img *ngIf="caseChess.piece" [src]="caseChess.piece.image">

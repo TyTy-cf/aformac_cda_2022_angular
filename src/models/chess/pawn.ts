@@ -1,4 +1,5 @@
 import {Piece} from "./piece";
+import {Case} from "./case";
 
 export class Pawn extends Piece {
 
@@ -6,8 +7,7 @@ export class Pawn extends Piece {
     super(color, '/assets/images/chess/pawn-' + color + '.png');
   }
 
-  move(): void {
-    console.log('Move du pion !');
+  move(initialCase: Case, board: Case[]): Case[] {
+    return [];
   }
-
 }

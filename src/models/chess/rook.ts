@@ -1,5 +1,6 @@
 
 import {Piece} from "./piece";
+import {Case} from "./case";
 
 export class Rook extends Piece {
 
@@ -7,8 +8,12 @@ export class Rook extends Piece {
     super(color, '/assets/images/chess/rook-' + color + '.png');
   }
 
-  move(): void {
-    console.log('Move de la tour !');
+  move(initialCase: Case, board: Case[]): Case[] {
+    return board.filter((aCase) => {
+       if ((aCase.x === initialCase.x || aCase.y === initialCase.y) && aCase !== initialCase) {
+         aCase.availableMove = true;
+       }
+    });
   }
 
 }
