@@ -4,7 +4,7 @@ import {Piece} from "./piece";
 export class King extends Piece {
 
   constructor(color: string) {
-    super('/assets/images/chess/king-' + color + '.png');
+    super(color, '/assets/images/chess/king-' + color + '.png');
   }
 
   move(): void {
