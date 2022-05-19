@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-navbar',
@@ -6,5 +7,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent {
+
+  @Input()
+  isVisible: boolean = true;
+
+  urlsRoute: string[] = [
+    'Chess',
+    'Regions'
+  ];
+
+  constructor(public router: Router) { }
 
 }
