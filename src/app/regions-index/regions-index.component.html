@@ -10,12 +10,18 @@
         <th>
           Code
         </th>
+        <th>
+          Nb départements
+        </th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let region of regions">
-        <td>{{region.nom}}</td>
-        <td>{{region.code}}</td>
+      <tr *ngFor="let region of regionCountArray"
+          routerLink="/regions/{{region.region.code}}/departements"
+      >
+        <td>{{region.region.nom}}</td>
+        <td>{{region.region.code}}</td>
+        <td>{{region.nbDepartments}}</td>
       </tr>
     </tbody>
   </table>

@@ -7,13 +7,17 @@ import { ChessGameComponent } from './chess-game/chess-game.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import {HttpClientModule} from "@angular/common/http";
 import { RegionsIndexComponent } from './regions-index/regions-index.component';
+import { DepartementsRegionComponent } from './departements-region/departements-region.component';
+import { CommunesDepartementComponent } from './communes-departement/communes-departement.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ChessGameComponent,
     NavbarComponent,
-    RegionsIndexComponent
+    RegionsIndexComponent,
+    DepartementsRegionComponent,
+    CommunesDepartementComponent
   ],
   imports: [
     BrowserModule,

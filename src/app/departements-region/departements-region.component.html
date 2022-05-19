@@ -1,0 +1,30 @@
+
+<div class="container">
+  <div *ngIf="region; else noRegion">
+    <h1>{{region.nom}} : départements</h1>
+    <table class="table table-striped table-hover">
+      <thead>
+      <tr>
+        <th>
+          Nom
+        </th>
+        <th>
+          Code
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let dpt of departments"
+          routerLink="/regions/{{dpt.codeRegion}}/departements/{{dpt.code}}/communes"
+      >
+        <td>{{dpt.nom}}</td>
+        <td>{{dpt.code}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<ng-template #noRegion>
+  <p>Aucune région ne coresponds à ce code</p>
+</ng-template>
