@@ -5,16 +5,20 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ChessGameComponent } from './chess-game/chess-game.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import {HttpClientModule} from "@angular/common/http";
+import { RegionsIndexComponent } from './regions-index/regions-index.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ChessGameComponent,
-    NavbarComponent
+    NavbarComponent,
+    RegionsIndexComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

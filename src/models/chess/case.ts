@@ -2,19 +2,15 @@ import {Piece} from "./piece";
 
 export class Case {
 
-  private _x: number = 0;
-  private _y: number = 0;
-  private _color: string = '';
-  private _piece: Piece|undefined;
   private _isSelected: boolean = false;
   private _availableMove: boolean = false;
 
-  constructor(x: number, y: number, color: string, piece: Piece | undefined) {
-    this._x = x;
-    this._y = y;
-    this._color = color;
-    this._piece = piece;
-  }
+  constructor(
+    private _x: number,
+    private _y: number,
+    private _color: string,
+    private _piece: Piece | undefined
+  ) { }
 
   get x(): number {
     return this._x;
