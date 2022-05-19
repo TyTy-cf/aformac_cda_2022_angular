@@ -2,13 +2,15 @@
 <header *ngIf="isVisible">
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-      <a class="navbar-brand"
-         *ngFor="let url of urlsRoute"
-         routerLink="/{{ url|lowercase }}"
-         [class.my-active]="router.url === '/' + url.toLowerCase()"
-      >
-        {{ url }}
-      </a>
+      <div class="navbar-nav">
+        <a class="nav-link"
+           *ngFor="let url of urlsRoute"
+           routerLink="/{{ url|lowercase }}"
+           [class.active]="router.url === '/' + url.toLowerCase()"
+        >
+          {{ url }}
+        </a>
+      </div>
     </div>
   </nav>
 </header>
