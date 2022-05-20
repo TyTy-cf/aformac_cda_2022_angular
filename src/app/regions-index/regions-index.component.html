@@ -16,12 +16,19 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let region of regionCountArray"
-          routerLink="/regions/{{region.region.code}}/departements"
+<!--      <tr *ngFor="let region of regionCountArray"-->
+<!--          routerLink="/regions/{{region.region.code}}/departements"-->
+<!--      >-->
+<!--        <td>{{region.region.nom}}</td>-->
+<!--        <td>{{region.region.code}}</td>-->
+<!--        <td>{{region.nbDepartments}}</td>-->
+<!--      </tr>-->
+      <tr *ngFor="let region of regions"
+          routerLink="/regions/{{region.code}}/departements"
       >
-        <td>{{region.region.nom}}</td>
-        <td>{{region.region.code}}</td>
-        <td>{{region.nbDepartments}}</td>
+        <td>{{region.nom}}</td>
+        <td>{{region.code}}</td>
+        <td>{{getCountDepartmentsByRegion(region.code)}}</td>
       </tr>
     </tbody>
   </table>

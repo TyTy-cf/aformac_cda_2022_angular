@@ -14,19 +14,28 @@ import {RegionsCount} from "../../models/geo-gouv/regions-count";
 export class RegionsIndexComponent implements OnInit {
 
   regions: Region[] = [];
-  regionCountArray: RegionsCount[] = [];
+  // regionCountArray: RegionsCount[] = [];
+  departmentsArray: Departement[] = [];
 
   constructor(private httpService: HttpClientService) { }
 
   ngOnInit(): void {
-    this.httpService.getRequest<Region[]>(UrlApi.urlRegions).subscribe((jsonApi) => {
+    this.httpService.getRequest<Region[]>(UrlApi.urlRegionsAll).subscribe((jsonApi) => {
       this.regions = jsonApi;
-      this.regions.forEach((region) => {
-        this.httpService.getRequest<Departement[]>(sprintf(UrlApi.urlDepartementsByRegion, region.code)).subscribe((jsonApi) => {
-          this.regionCountArray.push({region: region, nbDepartments: jsonApi.length});
-        });
-      });
+      // this.regions.forEach((region) => {
+      //   this.httpService.getRequest<Departement[]>(sprintf(UrlApi.urlDepartmentsByRegion, region.code)).subscribe((jsonApi) => {
+      //     this.regionCountArray.push({region: region, nbDepartments: jsonApi.length});
+      //   });
+      // });
     });
+
+    this.httpService.getRequest<Departement[]>(UrlApi.urlDepartmentsAll).subscribe(json => {
+      this.departmentsArray = json;
+    });
+  }
+
+  getCountDepartmentsByRegion(code: string): number {
+    return this.departmentsArray.filter((dpt) => dpt.codeRegion === code).length;
   }
 
 }

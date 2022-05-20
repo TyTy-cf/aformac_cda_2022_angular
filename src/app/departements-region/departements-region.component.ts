@@ -25,11 +25,12 @@ export class DepartementsRegionComponent implements OnInit {
     let codeReg: string = '';
     this.activatedRoute.params.subscribe((params) => {
       codeReg = params.codeRegion;
+      // $request->get('codeRegion')
     });
     this.httpService.getRequest<Region>(UrlApi.urlRegions + codeReg).subscribe((json) => {
       this.region = json;
       if (this.region) {
-        this.httpService.getRequest<Departement[]>(sprintf(UrlApi.urlDepartementsByRegion, codeReg)).subscribe((json) => {
+        this.httpService.getRequest<Departement[]>(sprintf(UrlApi.urlDepartmentsByRegion, codeReg)).subscribe((json) => {
           this.departments = json;
         });
       }

@@ -1,1 +1,40 @@
-<p>communes-departement works!</p>
+
+<div class="container">
+  <div *ngIf="department; else noDpt">
+    <h1>{{department.nom}} : départements</h1>
+    <table class="table table-striped table-hover">
+      <thead>
+      <tr>
+        <th>
+          Nom
+        </th>
+        <th>
+          Code INSEE
+        </th>
+        <th>
+          Population
+        </th>
+        <th>
+          Codes postaux
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let commune of communes">
+        <td>{{commune.nom}}</td>
+        <td>{{commune.code}}</td>
+        <td>{{commune.population}}</td>
+        <td>
+          <ul>
+            <li *ngFor="let codePost of commune.codesPostaux">{{codePost}}</li>
+          </ul>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<ng-template #noDpt>
+  <p>Aucun département ne correspond à ce code</p>
+</ng-template>
