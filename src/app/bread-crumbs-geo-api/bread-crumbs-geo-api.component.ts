@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {Region} from "../../models/geo-gouv/region";
 import {Departement} from "../../models/geo-gouv/departement";
 
@@ -7,7 +7,7 @@ import {Departement} from "../../models/geo-gouv/departement";
   templateUrl: './bread-crumbs-geo-api.component.html',
   styleUrls: ['./bread-crumbs-geo-api.component.scss']
 })
-export class BreadCrumbsGeoApiComponent implements OnInit {
+export class BreadCrumbsGeoApiComponent {
 
   @Input()
   region: Region|undefined;
@@ -15,8 +15,4 @@ export class BreadCrumbsGeoApiComponent implements OnInit {
   @Input()
   department: Departement|undefined;
 
-  ngOnInit(): void {
-    console.log(this.region)
-    console.log(this.department)
-  }
 }
