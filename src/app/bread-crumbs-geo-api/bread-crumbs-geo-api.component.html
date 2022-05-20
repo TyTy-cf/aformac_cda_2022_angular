@@ -1,0 +1,24 @@
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item active" aria-current="page" *ngIf="!department && !region">
+      Régions
+    </li>
+    <li class="breadcrumb-item" *ngIf="region">
+      <a href="#" routerLink="/regions">
+        Régions
+      </a>
+    </li>
+    <li class="breadcrumb-item" *ngIf="region && department">
+      <a href="#" routerLink="/regions/{{region.code}}/departements">
+        {{region.nom}} : départements
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page" *ngIf="region && !department">
+      {{region.nom}} : départements
+    </li>
+    <li class="breadcrumb-item active" aria-current="page" *ngIf="region && department">
+      {{department.nom}} : communes
+    </li>
+  </ol>
+</nav>

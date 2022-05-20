@@ -9,6 +9,7 @@ import {HttpClientModule} from "@angular/common/http";
 import { RegionsIndexComponent } from './regions-index/regions-index.component';
 import { DepartementsRegionComponent } from './departements-region/departements-region.component';
 import { CommunesDepartementComponent } from './communes-departement/communes-departement.component';
+import { BreadCrumbsGeoApiComponent } from './bread-crumbs-geo-api/bread-crumbs-geo-api.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { CommunesDepartementComponent } from './communes-departement/communes-de
     NavbarComponent,
     RegionsIndexComponent,
     DepartementsRegionComponent,
-    CommunesDepartementComponent
+    CommunesDepartementComponent,
+    BreadCrumbsGeoApiComponent
   ],
   imports: [
     BrowserModule,
