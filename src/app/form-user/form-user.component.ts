@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import {User} from "../../models/user";
-
 @Component({
   selector: 'app-form-user',
   templateUrl: './form-user.component.html',

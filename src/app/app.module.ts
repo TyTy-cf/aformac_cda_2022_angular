@@ -12,6 +12,7 @@ import { CommunesDepartementComponent } from './communes-departement/communes-de
 import { BreadCrumbsGeoApiComponent } from './bread-crumbs-geo-api/bread-crumbs-geo-api.component';
 import {FormsModule} from "@angular/forms";
 import { FormUserComponent } from './form-user/form-user.component';
+import { BattlegroundComponent } from './battleground/battleground.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { FormUserComponent } from './form-user/form-user.component';
     DepartementsRegionComponent,
     CommunesDepartementComponent,
     BreadCrumbsGeoApiComponent,
-    FormUserComponent
+    FormUserComponent,
+    BattlegroundComponent
   ],
   imports: [
     BrowserModule,
