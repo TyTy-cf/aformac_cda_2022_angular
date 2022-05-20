@@ -10,6 +10,8 @@ import { RegionsIndexComponent } from './regions-index/regions-index.component';
 import { DepartementsRegionComponent } from './departements-region/departements-region.component';
 import { CommunesDepartementComponent } from './communes-departement/communes-departement.component';
 import { BreadCrumbsGeoApiComponent } from './bread-crumbs-geo-api/bread-crumbs-geo-api.component';
+import {FormsModule} from "@angular/forms";
+import { FormUserComponent } from './form-user/form-user.component';
 
 @NgModule({
   declarations: [
@@ -19,12 +21,14 @@ import { BreadCrumbsGeoApiComponent } from './bread-crumbs-geo-api/bread-crumbs-
     RegionsIndexComponent,
     DepartementsRegionComponent,
     CommunesDepartementComponent,
-    BreadCrumbsGeoApiComponent
+    BreadCrumbsGeoApiComponent,
+    FormUserComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
