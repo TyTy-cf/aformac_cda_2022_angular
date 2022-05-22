@@ -3,6 +3,10 @@ export abstract class Hero {
 
   protected _level: number = 1;
   protected _criticalChance: number = 5;
+  private _totalDamageDone: number = 0;
+  private _totalCriticalStrikeDone: number = 0;
+  private _killedBy: Hero | undefined;
+  private _totalKilled: number = 0;
 
   protected constructor(
     protected _name: string,
@@ -71,6 +75,22 @@ export abstract class Hero {
     this._defense = value;
   }
 
+  get killedBy(): Hero | undefined {
+    return this._killedBy;
+  }
+
+  set killedBy(value: Hero | undefined) {
+    this._killedBy = value;
+  }
+
+  get totalKilled(): number {
+    return this._totalKilled;
+  }
+
+  set totalKilled(value: number) {
+    this._totalKilled = value;
+  }
+
   isAlive(): boolean {
     return this._hitPoint > 0;
   }
@@ -87,21 +107,44 @@ export abstract class Hero {
     this._minDamage += this._levelUpDamage;
   }
 
+  get totalDamageDone(): number {
+    return this._totalDamageDone;
+  }
+
+  get totalCriticalStrikeDone(): number {
+    return this._totalCriticalStrikeDone;
+  }
+
   randomIntFromInterval(min: number, max: number) {
     return Math.floor(Math.random() * (max - min + 1) + min)
   }
 
-  attack(anHero: Hero): void {
-    if (!anHero || !this) return;
+  attack(anHero: Hero): number {
+    if (!anHero || !this) return 0;
     let damages: number = this.randomIntFromInterval(this._minDamage, this._maxDamage);
     let isCrit: boolean = false;
     if (this._criticalChance >= this.randomIntFromInterval(0, 100)) {
       damages *= 1.5;
       isCrit = true;
+      this._totalCriticalStrikeDone += 1;
     }
     damages *= (1 - anHero.defense / 100);
-    anHero.hitPoint -= Math.round(damages);
-    console.log(this.name + ' tabasse ' + anHero.name + ' pour ' + Math.round(damages) + ' damages ' + (isCrit ? 'CC ' : '') + '(il lui reste ' + anHero.hitPoint +')' );
+    damages = Math.round(damages);
+    this._totalDamageDone += damages;
+    anHero.hitPoint -= damages;
+    if (anHero.hitPoint < 0) {
+      anHero.hitPoint = 0;
+    }
+    console.log(this.name + ' tabasse ' + anHero.name + ' pour ' + damages + ' damages ' + (isCrit ? 'CC ' : '') + '(il lui reste ' + anHero.hitPoint +')' );
+    return damages;
+  }
+
+  toString(): string {
+    return this.name + ' (lvl. ' + this.level + ') ' + this.getHeroClass();
+  }
+
+  getHeroClass(): string {
+    return this.constructor.name;
   }
 
 }

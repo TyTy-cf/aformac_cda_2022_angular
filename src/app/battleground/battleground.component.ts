@@ -8,10 +8,13 @@ import {Battleground} from "../../models/rpg/battleground";
 })
 export class BattlegroundComponent {
 
-  battleground: Battleground = new Battleground('Kevin', 'Mickael', 'Jeoffrey', 'Sophana', 'Ayoub', 'Joao', 'Maxime', 'Jules', 'Théau');
-
+  battleground: Battleground;
 
   constructor() {
-    this.battleground.startFight();
+    this.battleground = this.newFight();
+  }
+
+  newFight(): Battleground {
+    return new Battleground('Kevin', 'Mickael', 'Jeoffrey', 'Sophana', 'Ayoub', 'Joao');
   }
 }

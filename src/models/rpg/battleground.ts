@@ -3,56 +3,95 @@ import {Mage} from "./mage";
 import {Warrior} from "./warrior";
 import {Rogue} from "./rogue";
 import {Hunter} from "./hunter";
+import {HeroStats} from "./hero-stats";
 
 export class Battleground {
 
   heroes: Hero[] = [];
+  startedFight: boolean = false;
+  private _round: number = 1;
+  private _initialFighters: Hero[] = [];
+  private _maxSingleHit: HeroStats | undefined;
+  private _mostTotalDamages: Hero | undefined;
+  private _mostCriticalStrike: Hero | undefined;
+  private _mostHeroKiller: Hero | undefined;
+  private _rival: Hero | undefined;
+  private _deadHeroes: Hero[] = [];
+  private _tmpSingleHit: number = 0;
 
   constructor(...names: string[]) {
-    let classes = [Mage, Warrior, Rogue, Hunter];
+    let classes = [Mage, Warrior, Rogue, Hunter, Hunter, Rogue, Warrior, Mage];
     names.forEach((name) => {
+      classes.sort( () => .5 - Math.random() );
       let randomIndex: number =  Math.round(this.getRandom(0, classes.length - 1));
       this.heroes.push(new classes[randomIndex](name));
     });
+    this._initialFighters = this.heroes;
+    this._round = 1;
   }
 
   startFight(): void {
-    let round: number = 1;
-    while (this.heroes.length > 1) {
-      this.heroes = this.shuffle();
-      console.log('Ordre du round ' + round);
-      console.log(this.heroes)
-      this.heroes.forEach((hero) => {
-        if (hero.isAlive()) {
-          let otherHeroes: Hero[] = this.heroes.filter((heroFilter) => heroFilter.name !== hero.name && heroFilter.isAlive());
+    this.startedFight = true;
+    while (!this.isEndGame()) {
+      this.oneFightRound();
+      this.levelUpEveryone();
+    }
+    this.updateGameStats();
+    console.log(this.heroes[0].name + ' (lvl.' + this.heroes[0].level + ') a gagné la baguarre !');
+  }
+
+  oneFightRound(): void {
+    this.heroes = this.shuffleHeroOrder();
+    console.log('Ordre du round ' + this._round);
+    console.log(this.heroes)
+    this.heroes.forEach((hero) => {
+      if (hero.isAlive()) {
+        let otherHeroes: Hero[] = this.getOtherHeroes(hero);
+        if (otherHeroes.length !== 0) {
           const index = this.getRandom(0, otherHeroes.length - 1);
-          hero.attack(otherHeroes[index]);
-          if (otherHeroes[index]) {
-            if (otherHeroes[index].isAlive()) {
-              otherHeroes[index].attack(hero);
-              if (hero.isDead()) {
-                otherHeroes[index].levelUp();
-                console.log(hero.name + '(' + hero.level + ') est mort');
-              }
-            }
+          const targetHero: Hero = otherHeroes[index];
+          this.updateMaxSingleHit(hero, hero.attack(targetHero));
+          if (targetHero.isAlive()) {
+            this.updateMaxSingleHit(targetHero, targetHero.attack(hero));
+            this.checkDead(hero, targetHero);
           } else {
-            hero.levelUp();
-            console.log(otherHeroes[index].name + '(' + otherHeroes[index].level + ') est mort');
+            this.checkDead(targetHero, hero);
           }
         }
-        this.heroes = this.heroes.filter((heroAlive) => heroAlive.isAlive());
-      });
-      this.heroes.forEach((hero) =>  {
-        hero.levelUp();
-      });
-      console.log('Fin du round ' + round++);
-    }
-    if (this.heroes.length === 1) {
-      console.log(this.heroes[0].name + '(' + this.heroes[0].level + ') a gagné la baguarre !');
+      }
+      this.updateAliveHeroes();
+    });
+    console.log('Fin du round ' + this._round++);
+  }
+
+  private checkDead(checkHero: Hero, heroWinner: Hero): void {
+    if (checkHero.isDead()) {
+      // heroWinner.levelUp();
+      checkHero.killedBy = heroWinner;
+      heroWinner.totalKilled++;
+      this._deadHeroes.push(checkHero);
+      if (this.heroes.length === 2) {
+        this._rival = checkHero;
+      }
+      console.log(checkHero.name + ' (lvl. ' + checkHero.level + ') est mort');
     }
   }
 
-  shuffle(): Hero[] {
+  private getOtherHeroes(hero: Hero): Hero[] {
+    return this.heroes.filter((heroFilter) => heroFilter.name !== hero.name && heroFilter.isAlive());
+  }
+
+  private updateAliveHeroes(): void {
+    this.heroes = this.heroes.filter((heroAlive) => heroAlive.isAlive());
+  }
+
+  private levelUpEveryone(): void {
+    this.heroes.forEach((hero) =>  {
+      hero.levelUp();
+    });
+  }
+
+  private shuffleHeroOrder(): Hero[] {
     let newHero: Hero[] = [];
     const initialSize: number = this.heroes.length;
     while (newHero.length !== initialSize) {
@@ -63,8 +102,79 @@ export class Battleground {
     return newHero;
   }
 
+  isEndGame(): boolean {
+    return this.heroes.length === 1;
+  }
+
   getRandom(min: number, max: number) {
     return Math.floor(Math.random() * (max - min + 1) + min)
   }
 
+  get maxSingleHit(): HeroStats | undefined {
+    return this._maxSingleHit;
+  }
+
+  get mostTotalDamages(): Hero | undefined {
+    return this._mostTotalDamages;
+  }
+
+  get mostCriticalStrike(): Hero | undefined {
+    return this._mostCriticalStrike;
+  }
+
+  private updateGameStats(): void {
+    let allHeroes: Hero[] = [];
+    let tmpTotalDamage: number = 0;
+    let tmpMostCriticalStrike: number = 0;
+    let tmpBestKiller: number = 0;
+    allHeroes = allHeroes.concat(this.heroes, this._deadHeroes);
+    allHeroes.forEach((hero) => {
+      if (tmpTotalDamage < hero.totalDamageDone) {
+        tmpTotalDamage = hero.totalDamageDone;
+        this._mostTotalDamages = hero;
+      }
+      if (tmpMostCriticalStrike < hero.totalCriticalStrikeDone) {
+        tmpMostCriticalStrike = hero.totalCriticalStrikeDone;
+        this._mostCriticalStrike = hero;
+      }
+      if (tmpBestKiller < hero.totalKilled) {
+        tmpBestKiller = hero.totalKilled;
+        this._mostHeroKiller = hero;
+      }
+    });
+  }
+
+  private updateMaxSingleHit(hero: Hero, damages: number): void {
+    if (damages > this._tmpSingleHit) {
+      this._tmpSingleHit = damages;
+      this._maxSingleHit = {
+        hero: hero,
+        stats: this._tmpSingleHit
+      }
+    }
+  }
+
+  get initialFighters(): Hero[] {
+    return this._initialFighters;
+  }
+
+  get winner(): Hero {
+    return this.heroes[0];
+  }
+
+  get firstToDie(): Hero {
+    return this._deadHeroes[0];
+  }
+
+  get deadHeroes(): Hero[] {
+    return this._deadHeroes;
+  }
+
+  get mostHeroKiller(): Hero | undefined {
+    return this._mostHeroKiller;
+  }
+
+  get rival(): Hero | undefined {
+    return this._rival;
+  }
 }
