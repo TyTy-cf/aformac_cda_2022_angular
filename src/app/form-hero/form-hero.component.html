@@ -24,17 +24,13 @@
       </div>
       <div class="row">
         <div class="col-lg-6">
-          <label class="form-label ms-2">Email</label>
-          <input type="text"
-                 class="form-control"
-                 formControlName="email"
-                 [class.is-invalid]="(email.dirty || email.touched) && email.invalid"
-                 [class.is-valid]="email.valid"
-                 placeholder="Email"
-          >
-          <div *ngIf="(email.dirty || email.touched) && email.invalid" class="btn-danger ps-2 py-1">
-            <div *ngIf="email.errors?.required">
-              L'email est obligatoire
+          <label class="form-label ms-2">Classes</label>
+          <select formControlName="classes" class="form-select">
+            <option *ngFor="let classe of classesChoices" [ngValue]="classe">Classe {{classe.name}}</option>
+          </select>
+          <div *ngIf="(classes.dirty || classes.touched) && classes.invalid" class="btn-danger ps-2 py-1">
+            <div *ngIf="classes.errors?.required">
+              La classe est obligatoire
             </div>
           </div>
         </div>

@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {AbstractControl, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
+import {Mage} from "../../models/rpg/mage";
+import {Warrior} from "../../models/rpg/warrior";
+import {Rogue} from "../../models/rpg/rogue";
+import {Hunter} from "../../models/rpg/hunter";
+import {Hero} from "../../models/rpg/hero";
 
 @Component({
   selector: 'app-form-hero',
@@ -10,6 +15,7 @@ import {Router} from "@angular/router";
 export class FormHeroComponent implements OnInit {
 
   heroFormGroup!: FormGroup;
+  classesChoices = [Mage, Warrior, Rogue, Hunter];
 
   constructor(private router: Router) { }
 
@@ -21,25 +27,16 @@ export class FormHeroComponent implements OnInit {
           Validators.minLength(2)
         ]
       ),
-      email: new FormControl(
+      classes: new FormControl(
         '', [
-          Validators.required,
+          Validators.required
         ]
-      ),
-      // classes: new FormControl(
-      //   '', [
-      //     Validators.required
-      //   ]
-      // )
+      )
     });
   }
 
   get name(): AbstractControl {
     return <AbstractControl> this.heroFormGroup.get('name');
-  }
-
-  get email(): AbstractControl {
-    return <AbstractControl> this.heroFormGroup.get('email');
   }
 
   get classes(): AbstractControl {
@@ -49,7 +46,8 @@ export class FormHeroComponent implements OnInit {
   onSubmit(): void {
     if (this.heroFormGroup.valid) {
       // redirect
-      console.log(this.name.value);
+      let myHero: Hero = new this.classes.value(this.name.value);
+      console.log(myHero);
       // this.router.navigate(['/battleground']).then();
     }
     // alert('ISSOU T AS CRUGE LE FORM ISSOU MDR');
