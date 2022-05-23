@@ -3,11 +3,12 @@ export abstract class Hero {
 
   protected _level: number = 1;
   protected _criticalChance: number = 5;
-  private _totalDamageDone: number = 0;
-  private _totalCriticalStrikeDone: number = 0;
-  private _killedBy: Hero | undefined;
-  private _totalKilled: number = 0;
-  private _maxSingleHit: number = 0;
+  protected _totalDamageDone: number = 0;
+  protected _totalCriticalStrikeDone: number = 0;
+  protected _killedBy: Hero | undefined;
+  protected _totalKilled: number = 0;
+  protected _maxSingleHit: number = 0;
+  private _hitPointMax: number = 0
 
   protected constructor(
     protected _name: string,
@@ -17,7 +18,10 @@ export abstract class Hero {
     protected _defense: number,
     protected _levelUpHitPoint: number,
     protected _levelUpDamage: number,
+    protected _image: string,
+    protected _color: string,
   ) {
+    this._hitPointMax = this._hitPoint;
   }
 
   get level(): number {
@@ -108,12 +112,41 @@ export abstract class Hero {
     this._maxSingleHit = value;
   }
 
+  get image(): string {
+    return this._image;
+  }
+
+  set image(value: string) {
+    this._image = value;
+  }
+
+  get color(): string {
+    return this._color;
+  }
+
+  set color(value: string) {
+    this._color = value;
+  }
+
+  get hitPointMax(): number {
+    return this._hitPointMax;
+  }
+
+  set hitPointMax(value: number) {
+    this._hitPointMax = value;
+  }
+
+  get hpBar(): number {
+    return (this.hitPoint / this._hitPointMax) * 100;
+  }
+
   levelUp(): void {
     this._level++;
     this._criticalChance += 0.25;
     this._hitPoint += this._levelUpHitPoint;
     this._maxDamage += this._levelUpDamage;
     this._minDamage += this._levelUpDamage;
+    this._hitPointMax += this._levelUpHitPoint;
   }
 
   get totalDamageDone(): number {

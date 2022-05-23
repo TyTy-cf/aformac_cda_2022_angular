@@ -1,0 +1,83 @@
+
+.hero-image {
+  border-top-left-radius: 1em;
+  border-top-right-radius: 1em;
+  border: 1px solid black;
+  height: 240px;
+
+  > img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+}
+
+.hp-bar {
+  height: 2em;
+  background-color: #383838;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  position: relative;
+
+  .current-life {
+    height: 100%;
+    background-color: forestgreen;
+    color: white;
+  }
+
+  .container-hp {
+    position: absolute;
+    top: 0;
+    right: 40%;
+    font-size: 1.2em;
+    color: white;
+  }
+
+}
+
+.stats {
+
+  padding-bottom: 0.5em;
+  border-bottom: 1px solid #383838;
+  border-left: 1px solid #383838;
+  border-right: 1px solid #383838;
+  border-bottom-left-radius: .5em;
+  border-bottom-right-radius: .5em;
+  position: relative;
+  border-top: 1px solid black;
+
+  .img-icon {
+    height: 1.8em;
+
+    > img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+
+  .container-name {
+    position: absolute;
+    top: 0;
+    right: 5px;
+    font-size: 1.2em;
+  }
+
+}
+
+.hp-0 {
+  background-color: #383838 !important;
+}
+
+.hp-25 {
+  background-color: red !important;
+}
+
+.hp-50 {
+  background-color: #ff9100 !important;
+}
+
+.hp-75 {
+  background-color: #00ce08 !important;
+}
+

@@ -1,0 +1,51 @@
+
+<div *ngIf="hero">
+  <div>
+    <div class="hero-image" [ngStyle]="{'background-color': hero.color}">
+      <img [src]="hero.image" [alt]="hero.getHeroClass()">
+    </div>
+    <div class="hp-bar">
+      <div class="current-life text-center"
+           [ngStyle]="{'width': hero.hpBar + '%'}"
+           [class.hp-0]="hero.isDead()"
+           [class.hp-25]="hero.hpBar <= 25 && hero.hpBar > 0"
+           [class.hp-50]="hero.hpBar <= 50 && hero.hpBar > 25"
+           [class.hp-75]="hero.hpBar <= 75 && hero.hpBar > 50"
+      >
+      </div>
+      <div class="container-hp">
+        {{hero.hitPoint}}/{{hero.hitPointMax}}
+      </div>
+    </div>
+    <div class="stats">
+      <div class="container-name">
+        {{hero.name}} <br>Lvl. {{hero.level}}
+      </div>
+      <div class="row">
+        <div class="col-2 img-icon">
+          <img src="assets/images/rpg/sword.png">
+        </div>
+        <div class="col-10">
+          {{hero.minDamage}} - {{hero.maxDamage}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-2 img-icon">
+          <img src="assets/images/rpg/defense.png">
+        </div>
+        <div class="col-10">
+          {{hero.defense}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-2 img-icon">
+          <img src="assets/images/rpg/cs.png">
+        </div>
+        <div class="col-10">
+          {{hero.criticalChance}}%
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

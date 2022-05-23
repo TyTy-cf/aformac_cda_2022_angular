@@ -14,6 +14,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { FormUserComponent } from './form-user/form-user.component';
 import { BattlegroundComponent } from './battleground/battleground.component';
 import { FormHeroComponent } from './form-hero/form-hero.component';
+import { CardHeroComponent } from './card-hero/card-hero.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { FormHeroComponent } from './form-hero/form-hero.component';
     BreadCrumbsGeoApiComponent,
     FormUserComponent,
     BattlegroundComponent,
-    FormHeroComponent
+    FormHeroComponent,
+    CardHeroComponent
   ],
   imports: [
     BrowserModule,
