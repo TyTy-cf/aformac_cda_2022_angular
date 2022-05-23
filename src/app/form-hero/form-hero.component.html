@@ -1,0 +1,47 @@
+
+<div class="container mt-3">
+  <div class="mx-auto">
+    <form [formGroup]="heroFormGroup">
+      <div class="row">
+        <div class="col-lg-6">
+          <label class="form-label ms-2">Nom</label>
+          <input type="text"
+                 class="form-control"
+                 formControlName="name"
+                 [class.is-invalid]="(name.dirty || name.touched) && name.invalid"
+                 [class.is-valid]="name.valid"
+                 placeholder="Nom"
+          >
+          <div *ngIf="(name.dirty || name.touched) && name.invalid" class="btn-danger ps-2 py-1">
+            <div *ngIf="name.errors?.required">
+              Le nom est obligatoire
+            </div>
+            <div *ngIf="name.errors?.minlength">
+              Le nom doit faire au moins 2 caractères
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-6">
+          <label class="form-label ms-2">Email</label>
+          <input type="text"
+                 class="form-control"
+                 formControlName="email"
+                 [class.is-invalid]="(email.dirty || email.touched) && email.invalid"
+                 [class.is-valid]="email.valid"
+                 placeholder="Email"
+          >
+          <div *ngIf="(email.dirty || email.touched) && email.invalid" class="btn-danger ps-2 py-1">
+            <div *ngIf="email.errors?.required">
+              L'email est obligatoire
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class="btn btn-dark mt-3" [disabled]="heroFormGroup.invalid" (click)="onSubmit()">
+        Créer personnage
+      </button>
+    </form>
+  </div>
+</div>

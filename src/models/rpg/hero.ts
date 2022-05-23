@@ -7,6 +7,7 @@ export abstract class Hero {
   private _totalCriticalStrikeDone: number = 0;
   private _killedBy: Hero | undefined;
   private _totalKilled: number = 0;
+  private _maxSingleHit: number = 0;
 
   protected constructor(
     protected _name: string,
@@ -99,6 +100,14 @@ export abstract class Hero {
     return this._hitPoint <= 0;
   }
 
+  get maxSingleHit(): number {
+    return this._maxSingleHit;
+  }
+
+  set maxSingleHit(value: number) {
+    this._maxSingleHit = value;
+  }
+
   levelUp(): void {
     this._level++;
     this._criticalChance += 0.25;
@@ -131,6 +140,9 @@ export abstract class Hero {
     damages *= (1 - anHero.defense / 100);
     damages = Math.round(damages);
     this._totalDamageDone += damages;
+    if (this._maxSingleHit < damages) {
+      this._maxSingleHit = damages;
+    }
     anHero.hitPoint -= damages;
     if (anHero.hitPoint < 0) {
       anHero.hitPoint = 0;

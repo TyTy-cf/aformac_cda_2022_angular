@@ -6,6 +6,7 @@ import {DepartementsRegionComponent} from "./departements-region/departements-re
 import {CommunesDepartementComponent} from "./communes-departement/communes-departement.component";
 import {FormUserComponent} from "./form-user/form-user.component";
 import {BattlegroundComponent} from "./battleground/battleground.component";
+import {FormHeroComponent} from "./form-hero/form-hero.component";
 
 const routes: Routes = [
   { path: 'chess', component: ChessGameComponent },
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'regions/:codeRegion/departements/:codeDpt/communes', component: CommunesDepartementComponent},
   { path: 'departements', component: DepartementsRegionComponent },
   { path: 'form/user', component: FormUserComponent },
+  { path: 'form/hero', component: FormHeroComponent },
   { path: 'battleground', component: BattlegroundComponent }
 ];
 

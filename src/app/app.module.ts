@@ -10,9 +10,10 @@ import { RegionsIndexComponent } from './regions-index/regions-index.component';
 import { DepartementsRegionComponent } from './departements-region/departements-region.component';
 import { CommunesDepartementComponent } from './communes-departement/communes-departement.component';
 import { BreadCrumbsGeoApiComponent } from './bread-crumbs-geo-api/bread-crumbs-geo-api.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { FormUserComponent } from './form-user/form-user.component';
 import { BattlegroundComponent } from './battleground/battleground.component';
+import { FormHeroComponent } from './form-hero/form-hero.component';
 
 @NgModule({
   declarations: [
@@ -24,13 +25,15 @@ import { BattlegroundComponent } from './battleground/battleground.component';
     CommunesDepartementComponent,
     BreadCrumbsGeoApiComponent,
     FormUserComponent,
-    BattlegroundComponent
+    BattlegroundComponent,
+    FormHeroComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule, // form par le template
+    ReactiveFormsModule, // form par le code
   ],
   providers: [],
   bootstrap: [AppComponent]

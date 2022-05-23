@@ -3,24 +3,22 @@ import {Mage} from "./mage";
 import {Warrior} from "./warrior";
 import {Rogue} from "./rogue";
 import {Hunter} from "./hunter";
-import {HeroStats} from "./hero-stats";
 
 export class Battleground {
 
   heroes: Hero[] = [];
   startedFight: boolean = false;
   private _round: number = 1;
-  private _initialFighters: Hero[] = [];
-  private _maxSingleHit: HeroStats | undefined;
+  private readonly _initialFighters: Hero[] = [];
+  private _maxSingleHitHero: Hero | undefined;
   private _mostTotalDamages: Hero | undefined;
   private _mostCriticalStrike: Hero | undefined;
   private _mostHeroKiller: Hero | undefined;
   private _rival: Hero | undefined;
   private _deadHeroes: Hero[] = [];
-  private _tmpSingleHit: number = 0;
 
   constructor(...names: string[]) {
-    let classes = [Mage, Warrior, Rogue, Hunter, Hunter, Rogue, Warrior, Mage];
+    let classes = [Mage, Warrior, Rogue, Hunter];
     names.forEach((name) => {
       classes.sort( () => .5 - Math.random() );
       let randomIndex: number =  Math.round(this.getRandom(0, classes.length - 1));
@@ -28,6 +26,7 @@ export class Battleground {
     });
     this._initialFighters = this.heroes;
     this._round = 1;
+    this.levelUpEveryone(10);
   }
 
   startFight(): void {
@@ -50,9 +49,9 @@ export class Battleground {
         if (otherHeroes.length !== 0) {
           const index = this.getRandom(0, otherHeroes.length - 1);
           const targetHero: Hero = otherHeroes[index];
-          this.updateMaxSingleHit(hero, hero.attack(targetHero));
+          hero.attack(targetHero);
           if (targetHero.isAlive()) {
-            this.updateMaxSingleHit(targetHero, targetHero.attack(hero));
+            targetHero.attack(hero);
             this.checkDead(hero, targetHero);
           } else {
             this.checkDead(targetHero, hero);
@@ -85,10 +84,12 @@ export class Battleground {
     this.heroes = this.heroes.filter((heroAlive) => heroAlive.isAlive());
   }
 
-  private levelUpEveryone(): void {
-    this.heroes.forEach((hero) =>  {
-      hero.levelUp();
-    });
+  private levelUpEveryone(nbLevel: number = 1): void {
+    for(let i = 0; i < nbLevel; i++) {
+      this.heroes.forEach((hero) =>  {
+        hero.levelUp();
+      });
+    }
   }
 
   private shuffleHeroOrder(): Hero[] {
@@ -110,8 +111,8 @@ export class Battleground {
     return Math.floor(Math.random() * (max - min + 1) + min)
   }
 
-  get maxSingleHit(): HeroStats | undefined {
-    return this._maxSingleHit;
+  get maxSingleHitHero(): Hero | undefined {
+    return this._maxSingleHitHero;
   }
 
   get mostTotalDamages(): Hero | undefined {
@@ -127,6 +128,7 @@ export class Battleground {
     let tmpTotalDamage: number = 0;
     let tmpMostCriticalStrike: number = 0;
     let tmpBestKiller: number = 0;
+    let tmpBestSingleHit: number = 0;
     allHeroes = allHeroes.concat(this.heroes, this._deadHeroes);
     allHeroes.forEach((hero) => {
       if (tmpTotalDamage < hero.totalDamageDone) {
@@ -141,17 +143,11 @@ export class Battleground {
         tmpBestKiller = hero.totalKilled;
         this._mostHeroKiller = hero;
       }
-    });
-  }
-
-  private updateMaxSingleHit(hero: Hero, damages: number): void {
-    if (damages > this._tmpSingleHit) {
-      this._tmpSingleHit = damages;
-      this._maxSingleHit = {
-        hero: hero,
-        stats: this._tmpSingleHit
+      if (tmpBestSingleHit < hero.maxSingleHit) {
+        tmpBestSingleHit = hero.maxSingleHit;
+        this._maxSingleHitHero = hero;
       }
-    }
+    });
   }
 
   get initialFighters(): Hero[] {
