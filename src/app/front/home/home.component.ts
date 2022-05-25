@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
     this.httpService.getRequest<IApiResponse<Game>>(UrlApi.urlGameAll).subscribe((json) => {
       this.gamesAlpha = json.items.sort((a, b) => a.name.localeCompare(b.name)).slice(0, 9);
       this.gamesPublishedAt = json.items.sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()).slice(0, 9);
-      console.log(this.gamesPublishedAt);
+      this.gamesPrices = json.items.sort((a, b) => b.price - a.price).slice(0, 9);
     });
   }
 

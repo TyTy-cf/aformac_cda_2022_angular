@@ -29,12 +29,15 @@ Page de détail d'un jeu
 Cf : https://www.instant-gaming.com/en/6011-buy-lego-star-wars-the-skywalker-saga-pc-game-steam-europe/
 
 
-Les genres (tags sur IG) sont cliquables, et permettent d'aller sur un nouveau component "/game/genre/{slugGenre}" de nom game-genre-component
+Les genres (tags sur IG) sont cliquables,et permettent d'aller sur un nouveau component "/game/genre/{slugGenre}" de nom game-genre-component
 
 Et il affichera tous les jeux d'un genre donné.
 
 
-Afficher tous les commentaires du jeu (max 5) et ajouter un bouton tous les commentaires pour permettre de tous les afficher.
+Afficher tous les commentaires du jeu (max 5) et probablement les derniers et ajouter un bouton tous les commentaires pour permettre de tous les afficher.
+
+
+Afficher 3 premiers jeux similaires (des jeux ayant au moins l'un des mêmes genres que le jeu en cours)
 
 
 (Soit via un nouveau component : /game/{slug}/comments => game-comments-component)

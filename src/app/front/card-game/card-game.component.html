@@ -1,6 +1,6 @@
 
 
-  <div class="card-game" *ngIf="game">
+  <a class="card-game" routerLink="/game/{{game.slug}}" *ngIf="game">
     <div class="container-image">
       <img class="img-100" src="{{ game.thumbnailCover }}">
       <div class="container-price">
@@ -14,4 +14,4 @@
         {{ game.name }}
       </p>
     </div>
-  </div>
+  </a>
