@@ -12,6 +12,9 @@ export class UrlApi {
   static urlSteamish: string = 'https://steam-ish.test-02.drosalys.net/api';
   static urlGame: string = UrlApi.urlSteamish + '/game';
   static urlGameAll: string = UrlApi.urlSteamish + '/game?limit=50';
+  static urlGameFilter: string = UrlApi.urlSteamish + '/game?sort=game.%s&direction=%s&page=1&limit=%s';
+
+
 
   // // sprintf(UrlApi.urlDepartementsByRegion, '84');
 

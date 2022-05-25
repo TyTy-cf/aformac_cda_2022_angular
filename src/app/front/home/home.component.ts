@@ -3,6 +3,7 @@ import {HttpClientService} from "../../../services/http-client.service";
 import {IApiResponse} from "../../../models/steamish/i-api-response";
 import {Game} from "../../../models/steamish/game";
 import {UrlApi} from "../../../url_api/url_api";
+import {sprintf} from "sprintf-js";
 
 @Component({
   selector: 'app-home',
@@ -18,10 +19,14 @@ export class HomeComponent implements OnInit {
   constructor(private httpService: HttpClientService) { }
 
   ngOnInit(): void {
-    this.httpService.getRequest<IApiResponse<Game>>(UrlApi.urlGameAll).subscribe((json) => {
-      this.gamesAlpha = json.items.sort((a, b) => a.name.localeCompare(b.name)).slice(0, 9);
-      this.gamesPublishedAt = json.items.sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()).slice(0, 9);
-      this.gamesPrices = json.items.sort((a, b) => b.price - a.price).slice(0, 9);
+    this.httpService.getRequest<IApiResponse<Game>>(sprintf(UrlApi.urlGameFilter,'publishedAt', 'desc', 9)).subscribe((json) => {
+      this.gamesPublishedAt = json.items;
+    });
+    this.httpService.getRequest<IApiResponse<Game>>(sprintf(UrlApi.urlGameFilter,'price', 'desc', 9)).subscribe((json) => {
+      this.gamesPrices = json.items;
+    });
+    this.httpService.getRequest<IApiResponse<Game>>(sprintf(UrlApi.urlGameFilter,'name', 'asc', 9)).subscribe((json) => {
+      this.gamesAlpha = json.items;
     });
   }
 

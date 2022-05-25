@@ -1,6 +1,27 @@
 
 
 <div class="container">
+  <h2 class="mt-4">Les dernières sorties</h2>
+  <div class="row">
+    <div class="col-lg-4 col-md-6 p-lg-5 p-md-3" *ngFor="let game of gamesPublishedAt">
+      <app-card-game [game]="game"></app-card-game>
+    </div>
+  </div>
+</div>
+
+<div class="darken-background">
+  <div class="container">
+    <h2>Les meilleurs jeux</h2>
+    <div class="row">
+      <div class="col-lg-4 col-md-6 p-lg-5 p-md-3" *ngFor="let game of gamesPrices">
+        <app-card-game [game]="game"></app-card-game>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <h2>Les jeux</h2>
   <div class="row">
     <div class="col-lg-4 col-md-6 p-lg-5 p-md-3" *ngFor="let game of gamesAlpha">
       <app-card-game [game]="game"></app-card-game>
