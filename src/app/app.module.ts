@@ -15,6 +15,9 @@ import { FormUserComponent } from './form-user/form-user.component';
 import { BattlegroundComponent } from './battleground/battleground.component';
 import { FormHeroComponent } from './form-hero/form-hero.component';
 import { CardHeroComponent } from './card-hero/card-hero.component';
+import { HomeComponent } from './front/home/home.component';
+import { CardGameComponent } from './front/card-game/card-game.component';
+import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 
 @NgModule({
   declarations: [
@@ -28,7 +31,9 @@ import { CardHeroComponent } from './card-hero/card-hero.component';
     FormUserComponent,
     BattlegroundComponent,
     FormHeroComponent,
-    CardHeroComponent
+    CardHeroComponent,
+    HomeComponent,
+    CardGameComponent
   ],
   imports: [
     BrowserModule,
@@ -36,6 +41,7 @@ import { CardHeroComponent } from './card-hero/card-hero.component';
     HttpClientModule,
     FormsModule, // form par le template
     ReactiveFormsModule, // form par le code
+    FontAwesomeModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

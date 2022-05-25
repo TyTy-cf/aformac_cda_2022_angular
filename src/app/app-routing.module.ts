@@ -7,6 +7,7 @@ import {CommunesDepartementComponent} from "./communes-departement/communes-depa
 import {FormUserComponent} from "./form-user/form-user.component";
 import {BattlegroundComponent} from "./battleground/battleground.component";
 import {FormHeroComponent} from "./form-hero/form-hero.component";
+import {HomeComponent} from "./front/home/home.component";
 
 const routes: Routes = [
   { path: 'chess', component: ChessGameComponent },
@@ -16,7 +17,8 @@ const routes: Routes = [
   { path: 'departements', component: DepartementsRegionComponent },
   { path: 'form/user', component: FormUserComponent },
   { path: 'form/hero', component: FormHeroComponent },
-  { path: 'battleground', component: BattlegroundComponent }
+  { path: 'battleground', component: BattlegroundComponent },
+  { path: '', component: HomeComponent }
 ];
 
 @NgModule({

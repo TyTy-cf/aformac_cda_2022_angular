@@ -9,6 +9,10 @@ export class UrlApi {
   static urlDepartmentsByRegion: string = UrlApi.rawUrlGeoApi + '/regions/%s/departements';
   static urlCommunesByDepartment: string = UrlApi.rawUrlGeoApi + '/departements/%s/communes';
 
+  static urlSteamish: string = 'https://steam-ish.test-02.drosalys.net/api';
+  static urlGame: string = UrlApi.urlSteamish + '/game';
+  static urlGameAll: string = UrlApi.urlSteamish + '/game?limit=50';
+
   // // sprintf(UrlApi.urlDepartementsByRegion, '84');
 
 }

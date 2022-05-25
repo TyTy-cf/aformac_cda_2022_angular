@@ -1,5 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {Router} from "@angular/router";
+import {faArrowLeft, IconDefinition} from "@fortawesome/free-solid-svg-icons";
 
 @Component({
   selector: 'app-navbar',
@@ -10,6 +11,8 @@ export class NavbarComponent {
 
   @Input()
   isVisible: boolean = true;
+
+  faArrowLeft: IconDefinition = faArrowLeft;
 
   urlsRoute: string[] = [
     'Chess',
