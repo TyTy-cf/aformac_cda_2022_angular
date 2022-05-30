@@ -8,11 +8,11 @@
           <input type="text"
                  class="form-control"
                  formControlName="name"
-                 [class.is-invalid]="(name.dirty || name.touched) && name.invalid"
+                 [class.is-invalid]="isFieldInvalid('name')"
                  [class.is-valid]="name.valid"
                  placeholder="Nom"
           >
-          <div *ngIf="(name.dirty || name.touched) && name.invalid" class="btn-danger ps-2 py-1">
+          <div *ngIf="isFieldInvalid('name')" class="btn-danger ps-2 py-1">
             <div *ngIf="name.errors?.required">
               Le nom est obligatoire
             </div>

@@ -20,6 +20,7 @@ export class FormHeroComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit(): void {
+    // Map<string, AbstractControl>
     this.heroFormGroup = new FormGroup({
       name: new FormControl(
         '', [
@@ -43,12 +44,17 @@ export class FormHeroComponent implements OnInit {
     return <AbstractControl> this.heroFormGroup.get('classes');
   }
 
+  isFieldInvalid(field: string): boolean {
+    let formControl: AbstractControl = <AbstractControl>this.heroFormGroup.get(field);
+    return (formControl.dirty || formControl.touched) && formControl.invalid;
+  }
+
   onSubmit(): void {
     if (this.heroFormGroup.valid) {
       // redirect
       let myHero: Hero = new this.classes.value(this.name.value);
       console.log(myHero);
-      // this.router.navigate(['/battleground']).then();
+      this.router.navigate(['/battleground']).then();
     }
     // alert('ISSOU T AS CRUGE LE FORM ISSOU MDR');
   }

@@ -13,4 +13,8 @@ export class HttpClientService {
     return this.httpClient.get<T>(url);
   }
 
+  postRequest<T>(url: string, item: T): Observable<T> {
+    return this.httpClient.post<T>(url, item);
+  }
+
 }
