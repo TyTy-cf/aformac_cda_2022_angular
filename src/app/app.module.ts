@@ -18,6 +18,7 @@ import { CardHeroComponent } from './card-hero/card-hero.component';
 import { HomeComponent } from './front/home/home.component';
 import { CardGameComponent } from './front/card-game/card-game.component';
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
+import { FormAccountComponent } from './form-account/form-account.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
     FormHeroComponent,
     CardHeroComponent,
     HomeComponent,
-    CardGameComponent
+    CardGameComponent,
+    FormAccountComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,64 @@
+
+<div class="container mt-3">
+  <div class="mx-auto">
+    <form [formGroup]="formGroupAccount">
+      <div class="row">
+        <div class="col-lg-6">
+          <label class="form-label ms-2">Nom</label>
+          <input type="text"
+                 class="form-control"
+                 formControlName="name"
+                 [class.is-invalid]="isFieldInvalid('name')"
+                 [class.is-valid]="getFields('name').valid"
+                 placeholder="Nom"
+          >
+          <div *ngIf="isFieldInvalid('name')" class="btn-danger ps-2 py-1">
+            <div *ngIf="getFields('name').errors?.required">
+              Le nom est obligatoire
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-6">
+          <label class="form-label ms-2">Email</label>
+          <input type="text"
+                 class="form-control"
+                 formControlName="email"
+                 [class.is-invalid]="isFieldInvalid('email')"
+                 [class.is-valid]="getFields('email').valid"
+                 placeholder="Email"
+          >
+          <div *ngIf="isFieldInvalid('email')" class="btn-danger ps-2 py-1">
+            <div *ngIf="getFields('email').errors?.required">
+              L'email est obligatoire
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-6">
+          <label class="form-label ms-2">Nickname</label>
+          <input type="text"
+                 class="form-control"
+                 formControlName="nickname"
+                 [class.is-invalid]="isFieldInvalid('nickname')"
+                 [class.is-valid]="getFields('nickname').valid"
+                 placeholder="Nickname"
+          >
+          <div *ngIf="isFieldInvalid('nickname')" class="btn-danger ps-2 py-1">
+            <div *ngIf="getFields('nickname').errors?.required">
+              Le pseudo est obligatoire
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class="btn btn-dark mt-3" [disabled]="formGroupAccount.invalid" (click)="onSubmit()">
+        Créer personnage
+      </button>
+      <div *ngIf="errors.length" class="btn-danger ps-2 py-1">
+        Erreur {{errors}}
+      </div>
+    </form>
+  </div>
+</div>

@@ -17,7 +17,8 @@ export class NavbarComponent {
   urlsRoute: string[] = [
     'Chess',
     'Regions',
-    'Battleground'
+    'Battleground',
+    'Register'
   ];
 
   constructor(public router: Router) { }
