@@ -18,7 +18,8 @@ export class NavbarComponent {
     'Chess',
     'Regions',
     'Battleground',
-    'Register'
+    'Register',
+    'Form/publisher'
   ];
 
   constructor(public router: Router) { }

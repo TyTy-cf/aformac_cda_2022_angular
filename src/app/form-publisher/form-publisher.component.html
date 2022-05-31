@@ -1,0 +1,82 @@
+
+<div class="container mt-3">
+  <div class="mx-auto">
+    <form [formGroup]="formPublisher">
+      <div class="row">
+        <div class="col-lg-6">
+          <label class="form-label ms-2">Nom</label>
+          <input type="text"
+                 class="form-control"
+                 formControlName="name"
+                 [class.is-invalid]="isFieldInvalid('name')"
+                 [class.is-valid]="getFields('name').valid"
+                 placeholder="Nom"
+          >
+          <div *ngIf="isFieldInvalid('name')" class="btn-danger ps-2 py-1">
+            <div *ngIf="getFields('name').errors?.required">
+              Le nom est obligatoire
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-6">
+          <label class="form-label ms-2">Website</label>
+          <input type="text"
+                 class="form-control"
+                 formControlName="website"
+                 [class.is-invalid]="isFieldInvalid('website')"
+                 [class.is-valid]="getFields('website').valid"
+                 placeholder="Website"
+          >
+          <div *ngIf="isFieldInvalid('website')" class="btn-danger ps-2 py-1">
+            <div *ngIf="getFields('website').errors?.required">
+              Le site web est obligatoire
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-6">
+          <label class="form-label ms-2">Pays</label>
+          <select class="form-select"
+                  formControlName="country"
+                  [class.is-invalid]="isFieldInvalid('country')"
+                  [class.is-valid]="getFields('country').valid"
+          >
+            <option *ngFor="let country of countries" [ngValue]="country">
+              {{country.name}}
+            </option>
+          </select>
+          <div *ngIf="isFieldInvalid('country')" class="btn-danger ps-2 py-1">
+            <div *ngIf="getFields('country').errors?.required">
+              Le pays est obligatoire
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-6">
+          <div formArrayName="games" *ngFor="let aFormControl of games.controls; index as indexFormControl"
+          >
+              <label class="form-label ms-2 my-1">Jeux #{{indexFormControl + 1}}</label>
+              <div class="d-flex">
+                <button type="button" class="btn btn-danger" (click)="removeForm(indexFormControl)" [disabled]="games.controls.length === 1">-</button>
+                <select class="form-select"
+                        [formControlName]="indexFormControl"
+                >
+                  <option *ngFor="let game of gamesArray" [ngValue]="game">
+                    {{game.name}}
+                  </option>
+                </select>
+              </div>
+          </div>
+          <button type="button" class="btn btn-success mt-2" (click)="addNewForm()">+</button>
+        </div>
+      </div>
+      <button class="btn btn-dark mt-3" [disabled]="formPublisher.invalid" (click)="onSubmit()">
+        Ajouter éditeur
+      </button>
+    </form>
+  </div>
+</div>

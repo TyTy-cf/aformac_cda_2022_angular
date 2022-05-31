@@ -9,6 +9,7 @@ import {BattlegroundComponent} from "./battleground/battleground.component";
 import {FormHeroComponent} from "./form-hero/form-hero.component";
 import {HomeComponent} from "./front/home/home.component";
 import {FormAccountComponent} from "./form-account/form-account.component";
+import {FormPublisherComponent} from "./form-publisher/form-publisher.component";
 
 const routes: Routes = [
   { path: 'chess', component: ChessGameComponent },
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'departements', component: DepartementsRegionComponent },
   { path: 'form/user', component: FormUserComponent },
   { path: 'form/hero', component: FormHeroComponent },
+  { path: 'form/publisher', component: FormPublisherComponent },
   { path: 'register', component: FormAccountComponent },
   { path: 'battleground', component: BattlegroundComponent },
   { path: '', component: HomeComponent }

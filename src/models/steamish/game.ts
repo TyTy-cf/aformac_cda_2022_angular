@@ -1,3 +1,4 @@
+import {Country} from "./country";
 
 export class Game {
 
@@ -9,6 +10,7 @@ export class Game {
   private _thumbnailCover: string = '';
   private _thumbnailLogo: string = '';
   private _slug: string = '';
+  private _countries: Country[] = [];
 
   get id(): string {
     return this._id;
@@ -72,5 +74,13 @@ export class Game {
 
   set slug(value: string) {
     this._slug = value;
+  }
+
+  get countries(): Country[] {
+    return this._countries;
+  }
+
+  set countries(value: Country[]) {
+    this._countries = value;
   }
 }
