@@ -1,0 +1,46 @@
+
+<div class="container" *ngIf="apiResponse">
+  <app-api-paginator [apiResponse]="apiResponse"
+                     (numberPage)="updateDataPaginated($event)"
+  ></app-api-paginator>
+  <h2 class="mt-4">Les comptes</h2>
+
+  <table class="table table-dark table-striped table-hover">
+    <thead>
+      <tr>
+        <th>
+          Nom
+        </th>
+        <th>
+          Email
+        </th>
+        <th>
+          Nickname
+        </th>
+        <th>
+          Pays
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let account of apiResponse.items">
+        <td>
+          {{account.name}}
+        </td>
+        <td>
+          {{account.email}}
+        </td>
+        <td>
+          {{account.nickname}}
+        </td>
+        <td>
+          <img [src]="account.country?.urlFlag" [alt]="account.country?.name">
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <app-api-paginator [apiResponse]="apiResponse"
+                     (numberPage)="updateDataPaginated($event)"
+  ></app-api-paginator>
+</div>

@@ -20,6 +20,9 @@ import { CardGameComponent } from './front/card-game/card-game.component';
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 import { FormAccountComponent } from './form-account/form-account.component';
 import { FormPublisherComponent } from './form-publisher/form-publisher.component';
+import { GamesIndexComponent } from './games-index/games-index.component';
+import { ApiPaginatorComponent } from './api-paginator/api-paginator.component';
+import { AccountIndexComponent } from './account-index/account-index.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +40,10 @@ import { FormPublisherComponent } from './form-publisher/form-publisher.componen
     HomeComponent,
     CardGameComponent,
     FormAccountComponent,
-    FormPublisherComponent
+    FormPublisherComponent,
+    GamesIndexComponent,
+    ApiPaginatorComponent,
+    AccountIndexComponent
   ],
   imports: [
     BrowserModule,

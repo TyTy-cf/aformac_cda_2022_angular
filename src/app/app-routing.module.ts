@@ -10,6 +10,8 @@ import {FormHeroComponent} from "./form-hero/form-hero.component";
 import {HomeComponent} from "./front/home/home.component";
 import {FormAccountComponent} from "./form-account/form-account.component";
 import {FormPublisherComponent} from "./form-publisher/form-publisher.component";
+import {GamesIndexComponent} from "./games-index/games-index.component";
+import {AccountIndexComponent} from "./account-index/account-index.component";
 
 const routes: Routes = [
   { path: 'chess', component: ChessGameComponent },
@@ -22,7 +24,9 @@ const routes: Routes = [
   { path: 'form/publisher', component: FormPublisherComponent },
   { path: 'register', component: FormAccountComponent },
   { path: 'battleground', component: BattlegroundComponent },
-  { path: '', component: HomeComponent }
+  { path: '', component: HomeComponent },
+  { path: 'games', component: GamesIndexComponent },
+  { path: 'account', component: AccountIndexComponent }
 ];
 
 @NgModule({

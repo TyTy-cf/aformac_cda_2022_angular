@@ -1,0 +1,15 @@
+
+<div class="container" *ngIf="apiResponse">
+  <app-api-paginator [apiResponse]="apiResponse"
+                     (numberPage)="updateDataPaginated($event)"
+  ></app-api-paginator>
+  <h2 class="mt-4">Les jeux</h2>
+  <div class="row">
+    <div class="col-lg-4 col-md-6 p-lg-5 p-md-3" *ngFor="let game of apiResponse.items">
+      <app-card-game [game]="game"></app-card-game>
+    </div>
+    <app-api-paginator [apiResponse]="apiResponse"
+                       (numberPage)="updateDataPaginated($event)"
+    ></app-api-paginator>
+  </div>
+</div>

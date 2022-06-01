@@ -1,6 +1,7 @@
 import {Country} from "./country";
+import {ISerializable} from "./interfaces/i-serializable";
 
-export class Game {
+export class Game implements ISerializable {
 
   private _id: string = '';
   private _name: string = '';
@@ -82,5 +83,12 @@ export class Game {
 
   set countries(value: Country[]) {
     this._countries = value;
+  }
+
+  postSerializable() {
+    throw new Error("Method not implemented.");
+  }
+  putSerializable() {
+    throw new Error("Method not implemented.");
   }
 }

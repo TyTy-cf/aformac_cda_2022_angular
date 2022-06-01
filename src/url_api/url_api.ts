@@ -11,9 +11,11 @@ export class UrlApi {
   static urlCommunesByDepartment: string = UrlApi.rawUrlGeoApi + '/departements/%s/communes';
 
   static urlSteamish: string = 'https://steam-ish.test-02.drosalys.net/api';
-  static urlGame: string = UrlApi.urlSteamish + '/game';
+  static urlGame: string = UrlApi.urlSteamish + '/game?page=%s&limit=%s';
   static urlGameBySLug: string = UrlApi.urlSteamish + '/game/%s';
+
   static urlAccount: string = UrlApi.urlSteamish + '/account';
+  static urlAccountGet: string = UrlApi.urlSteamish + '/account?page=%s&limit=%s';
   static urlPublisher: string = UrlApi.urlSteamish + '/publisher';
   static urlGameAll: string = UrlApi.urlSteamish + '/game?limit=50';
   static urlGameFilter: string = UrlApi.urlSteamish + '/game?sort=game.%s&direction=%s&page=1&limit=%s';

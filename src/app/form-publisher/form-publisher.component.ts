@@ -42,7 +42,7 @@ export class FormPublisherComponent implements OnInit {
         ]
       ),
       games: new FormArray([
-        new FormControl('')
+        new FormControl(this.publisher?.games[0])
       ])
     });
     // Get tous les jeux pour les afficher dans le select option

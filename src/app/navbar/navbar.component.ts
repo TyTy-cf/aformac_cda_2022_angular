@@ -19,7 +19,9 @@ export class NavbarComponent {
     'Regions',
     'Battleground',
     'Register',
-    'Form/publisher'
+    'Form/publisher',
+    'Games',
+    'Account'
   ];
 
   constructor(public router: Router) { }
