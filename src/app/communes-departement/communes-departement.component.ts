@@ -6,6 +6,7 @@ import {sprintf} from "sprintf-js";
 import {UrlApi} from "../../url_api/url_api";
 import {Departement} from "../../models/geo-gouv/departement";
 import {Region} from "../../models/geo-gouv/region";
+import {forkJoin, Observable} from "rxjs";
 
 @Component({
   selector: 'app-communes-departement',
@@ -29,16 +30,21 @@ export class CommunesDepartementComponent implements OnInit {
     this.activatedRoute.params.subscribe((params) => {
       codeReg = params.codeRegion;
       codeDpt = params.codeDpt;
-      this.httpService.getRequest<Departement>(sprintf(UrlApi.urlDepartmentByCode, codeDpt)).subscribe((json) => {
-        this.department = json;
-        if (this.department) {
-          this.httpService.getRequest<Commune[]>(sprintf(UrlApi.urlCommunesByDepartment, codeDpt)).subscribe((json) => {
-            this.communes = json;
-          });
-          this.httpService.getRequest<Region>(UrlApi.urlRegions + codeReg).subscribe((json) => {
-            this.region = json;
-          })
+
+      forkJoin([
+        this.httpService.getRequest<Departement>(sprintf(UrlApi.urlDepartmentByCode, codeDpt)),
+        this.httpService.getRequest<Commune[]>(sprintf(UrlApi.urlCommunesByDepartment, codeDpt)),
+        this.httpService.getRequest<Region>(UrlApi.urlRegions + codeReg)
+      ])
+      .subscribe(
+        (jsonObservable) => {
+          this.department = jsonObservable[0];
+          this.communes = jsonObservable[1];
+          this.region = jsonObservable[2];
         }
+      )
+      this.httpService.getRequest<Region>(UrlApi.urlRegions + codeReg).subscribe((json) => {
+        this.region = json;
       });
     });
   }

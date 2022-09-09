@@ -5,9 +5,9 @@
       <div class="row">
         <div class="col-lg-6">
           <label class="form-label ms-2">Nom</label>
-          <input type="text"
+          <input name="user[name]"
                  class="form-control"
-                 name="user[name]"
+                 type="text"
                  [(ngModel)]="user.name"
                  #userName="ngModel"
                  [class.is-invalid]="(userName.dirty || userName.touched) && userName.invalid"
